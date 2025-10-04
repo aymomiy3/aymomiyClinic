@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ayman Health Care</title>
+  <link rel="stylesheet" href="health.css">
+</head>
+<body>
+  <!-- <header>
+    🏥 Ayman Health Care
+  </header> -->
+
+  <nav>
+    <div class="logo">🏥 <span>Ayman Health Care</span></div>
+    <div>
+      <a href="#" onclick="showPage('home')">Home</a>
+      <a href="#" onclick="showPage('about')">About</a>
+      <a href="#" onclick="showPage('certificates')">Certificates</a>
+      <a href="#" onclick="showPage('register')">Registration</a>
+      <a href="#" onclick="showPage('dashboard')">Dashboard</a>
+      <a href="#" onclick="showPage('contact')">Contact</a>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Home Page -->
+    <section id="home" class="page">
+      <div class="home-container">
+        <div class="home-text">
+          <h1>Ayman Health Care</h1>
+          <p>"Health is wealth – take care of it today for a stronger tomorrow!"</p>
+          <p><em>💡 Little Joke:</em> "Why did the doctor carry a red pen?  
+          In case they needed to draw blood!" 🩸😄</p>
+        </div>
+        <div class="home-img">
+          <img src="Flork médica.jpeg" alt="Hospital Image" width="40px" height="300px">
+        </div>
+      </div>
+    </section>
+
+    <!-- About Page -->
+    <section id="about" class="page" style="display:none;">
+      <div class="card">
+        <h2>About Us</h2>
+        <p>Ayman Health Care is dedicated to providing quality healthcare with compassion and innovation. Our team of experts ensures the best care for every patient.</p>
+      </div>
+    </section>
+
+    <!-- Certificates Page -->
+    <section id="certificates" class="page" style="display:none;">
+      <div class="card">
+        <h2>Certificates & Achievements</h2>
+        <p>🏆 Certified by National Health Authority</p>
+        <p>🏆 Recognized for Excellence in Patient Care 2023</p>
+        <p>🏆 Awarded Best Regional Hospital 2022</p>
+      </div>
+    </section>
+
+    <!-- Dashboard Page -->
+    <section id="dashboard" class="page" style="display:none;">
+      <div class="card">
+        <h2>Patients Chart</h2>
+        <canvas id="patientsChart"></canvas>
+      </div>
+      <div class="card">
+        <h2>Patients Records</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Age</th>
+              <th>Issue</th>
+              <th>Threat Level</th>
+            </tr>
+          </thead>
+          <tbody id="patientsTable"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Registration Page -->
+    <section id="register" class="page" style="display:none;">
+      <div class="card">
+        <h2>Register New Patient</h2>
+        <form id="patientForm">
+          <input type="text" id="name" placeholder="Full Name" required>
+          <input type="number" id="age" placeholder="Age" required>
+          <input type="text" id="issue" placeholder="Health Issue" required>
+          <select id="threat">
+            <option value="Low">Low</option>
+            <option value="Moderate">Moderate</option>
+            <option value="High">High</option>
+            <option value="Critical">Critical</option>
+          </select>
+          <button type="submit">Register Patient</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Contact Page -->
+    <section id="contact" class="page" style="display:none;">
+      <div class="card">
+        <h2>Contact Us</h2>
+        <p>📞 Phone: +123 456 7890</p>
+        <p>📧 Email: info@aymanhealthcare.com</p>
+        <p>Follow us on:  
+          <a href="#">YouTube</a> | 
+          <a href="#">Instagram</a> | 
+          <a href="#">Facebook</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    📞 +123 456 7890 | 
+    <a href="#">YouTube</a> | 
+    <a href="#">Instagram</a> | 
+    <a href="#">Facebook</a>
+    <p>&copy; 2025 Ayman Health Care. All Rights Reserved.</p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    let patients = JSON.parse(localStorage.getItem("patients")) || [];
+
+    const patientsTable = document.getElementById("patientsTable");
+    const ctx = document.getElementById("patientsChart").getContext("2d");
+
+    let chart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: ["Low", "Moderate", "High", "Critical"],
+        datasets: [{
+          label: "Number of Patients",
+          data: [0,0,0,0],
+          backgroundColor: ["#2ecc71","#f1c40f","#e67e22","#e74c3c"]
+        }]
+      }
+    });
+
+    function updateUI() {
+      patientsTable.innerHTML = "";
+      patients.forEach(p => {
+        let row = `<tr>
+          <td>${p.name}</td>
+          <td>${p.age}</td>
+          <td>${p.issue}</td>
+          <td>${p.threat}</td>
+        </tr>`;
+        patientsTable.innerHTML += row;
+      });
+
+      let counts = {Low:0, Moderate:0, High:0, Critical:0};
+      patients.forEach(p => counts[p.threat]++);
+      chart.data.datasets[0].data = [
+        counts.Low, counts.Moderate, counts.High, counts.Critical
+      ];
+      chart.update();
+
+      localStorage.setItem("patients", JSON.stringify(patients));
+    }
+
+    document.getElementById("patientForm").addEventListener("submit", function(e){
+      e.preventDefault();
+      let newPatient = {
+        name: document.getElementById("name").value,
+        age: document.getElementById("age").value,
+        issue: document.getElementById("issue").value,
+        threat: document.getElementById("threat").value
+      };
+      patients.push(newPatient);
+      updateUI();
+      this.reset();
+      showPage("dashboard");
+    });
+
+    function showPage(pageId){
+      document.querySelectorAll(".page").forEach(p => p.style.display = "none");
+      document.getElementById(pageId).style.display = "block";
+    }
+
+    // Load Home Page first
+    showPage("home");
+    updateUI();
+  </script>
+</body>
+</html>
+

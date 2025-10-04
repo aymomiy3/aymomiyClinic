@@ -1,0 +1,173 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+body {
+  font-family: Arial, sans-serif;
+  margin: 0; 
+  padding: 0;
+  background: rgb(238, 230, 211);
+  color: #34393f;
+}
+
+/* Header */
+header {
+  background: #1dc5df;
+  color: rgb(247, 249, 250);
+  padding: 15px;
+  text-align: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Navbar */
+nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: #1dc5df;
+  padding: 10px;
+}
+nav .logo {
+  font-size: 14px;
+  font-family: "Bungee", sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  color: rgb(45, 50, 54);
+}
+nav .logo span {
+  margin-left: 8px;
+}
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 10px;
+  font-weight: bold;
+}
+nav a:hover {
+  text-decoration: underline;
+  color: rgb(12, 48, 69);
+}
+
+/* Layout */
+main {
+  padding: 20px;
+}
+
+/* Cards for all pages */
+.card {
+  background: white;
+  padding: 20px;
+  margin: 15px auto;
+  max-width: 900px;
+  border-radius: 15px;
+  border: 1px solid #1dc5df;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Table */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+table, th, td {
+  border: 1px solid #ddd;
+}
+th, td {
+  padding: 10px;
+  text-align: center;
+}
+th {
+  background: #1dc5df;
+  color: white;
+}
+
+/* Form */
+form input, form select, form button {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+form button {
+  background: #1dc5df;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+form button:hover {
+  background: #1593a8;
+}
+
+/* Charts */
+canvas {
+  width: 100% !important;
+  max-height: 300px;
+}
+
+/* Home Page */
+.home-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.home-text {
+  flex: 1;
+  padding: 20px;
+}
+.home-text h1 {
+  font-size: 60px;
+  font-family: "Bungee", sans-serif;
+  font-style: normal;
+  color: #1dc5df;
+}
+.home-text p {
+  font-size: 18px;
+  margin: 10px 0;
+}
+.home-img {
+  flex: 1;
+  padding: 20px;
+}
+.home-img img {
+  width: 100%;
+  border: 3px dotted #1dc5df;
+  border-radius: 50%;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+/* Footer */
+footer {
+  background: #1dc5df;
+  color: rgb(45, 50, 54);
+  text-align: center;
+  padding: 15px;
+  margin-top: 30px;
+}
+footer a {
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
+}
+footer a:hover {
+  text-decoration: underline;
+  color: #1d2f31;
+}
+
+/* Headings across all pages */
+.page h2 {
+  font-family: "Bungee", sans-serif;
+  font-size: 28px;
+  color: #1dc5df;
+  margin-bottom: 15px;
+  text-align: center;
+}
+.page p {
+  font-size: 16px;
+  line-height: 1.6;
+}
